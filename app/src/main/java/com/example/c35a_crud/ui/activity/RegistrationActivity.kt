@@ -40,6 +40,8 @@ class RegistrationActivity : AppCompatActivity() {
             var address = binding.registerAddress.text.toString()
             var phone = binding.registerContact.text.toString()
 
+
+
             userViewModel.signup(email, password) {
                       success, message, userId ->
                 if (success) {
