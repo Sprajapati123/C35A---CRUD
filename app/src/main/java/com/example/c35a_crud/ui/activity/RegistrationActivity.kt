@@ -53,7 +53,7 @@ class RegistrationActivity : AppCompatActivity() {
                             lastName, address,
                             phone, email
                         )
-
+    
                         ref.child(userId.toString()).setValue(userModel)
                             .addOnCompleteListener {
                             if(it.isSuccessful){
