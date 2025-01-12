@@ -13,6 +13,15 @@
         android:theme="@style/Theme.C35ACRUD"
         tools:targetApi="31">
         <activity
+            android:name=".ui.activity.ForgetPasswordActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.activity.NavigationActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.activity.NavigationScreen"
+            android:exported="false" />
+        <activity
             android:name=".ui.activity.RegistrationActivity"
             android:exported="false" />
         <activity

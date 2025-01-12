@@ -8,7 +8,6 @@ import com.google.firebase.database.FirebaseDatabase
 
 class UserRepositoryImpl : UserRepository {
 
-
     var database: FirebaseDatabase = FirebaseDatabase.getInstance()
 
     var ref: DatabaseReference = database.reference
@@ -17,14 +16,16 @@ class UserRepositoryImpl : UserRepository {
     var auth: FirebaseAuth = FirebaseAuth.getInstance()
 
 
-    override fun login(email: String, password: String,
-                       callback: (Boolean, String) -> Unit) {
-        auth.signInWithEmailAndPassword(email,password)
+    override fun login(
+        email: String, password: String,
+        callback: (Boolean, String) -> Unit
+    ) {
+        auth.signInWithEmailAndPassword(email, password)
             .addOnCompleteListener {
-                if(it.isSuccessful){
-                    callback(true,"Login succesfull")
-                }else{
-                    callback(false,it.exception?.message.toString())
+                if (it.isSuccessful) {
+                    callback(true, "Login succesfull")
+                } else {
+                    callback(false, it.exception?.message.toString())
                 }
             }
     }
@@ -34,13 +35,15 @@ class UserRepositoryImpl : UserRepository {
         password: String,
         callback: (Boolean, String, String) -> Unit
     ) {
-        auth.createUserWithEmailAndPassword(email,password)
+        auth.createUserWithEmailAndPassword(email, password)
             .addOnCompleteListener {
-                if(it.isSuccessful){
-                    callback(true,"Registration success",
-                        auth.currentUser?.uid.toString())
-                }else{
-                    callback(false,it.exception?.message.toString(),"")
+                if (it.isSuccessful) {
+                    callback(
+                        true, "Registration success",
+                        auth.currentUser?.uid.toString()
+                    )
+                } else {
+                    callback(false, it.exception?.message.toString(), "")
                 }
             }
     }
@@ -51,20 +54,20 @@ class UserRepositoryImpl : UserRepository {
         callback: (Boolean, String) -> Unit
     ) {
         ref.child(userId).setValue(userModel).addOnCompleteListener {
-            if(it.isSuccessful){
-                callback(true,"Registration success")
-            }else{
-                callback(false,it.exception?.message.toString())
+            if (it.isSuccessful) {
+                callback(true, "Registration success")
+            } else {
+                callback(false, it.exception?.message.toString())
             }
         }
     }
 
     override fun forgetPassword(email: String, callback: (Boolean, String) -> Unit) {
         auth.sendPasswordResetEmail(email).addOnCompleteListener {
-            if(it.isSuccessful){
-                callback(true,"Reset email sent to $email")
-            }else{
-                callback(false,it.exception?.message.toString())
+            if (it.isSuccessful) {
+                callback(true, "Reset email sent to $email")
+            } else {
+                callback(false, it.exception?.message.toString())
             }
         }
     }
