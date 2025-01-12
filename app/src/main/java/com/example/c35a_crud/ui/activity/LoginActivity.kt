@@ -28,22 +28,22 @@ class LoginActivity : AppCompatActivity() {
         userViewModel = UserViewModel(repo)
 
         binding.btnLogin.setOnClickListener {
-
+            //show
             var email :String = binding.editEmail.text.toString()
             var password :String = binding.editPassword.text.toString()
 
             userViewModel.login(email,password){
                     success,message->
                 if(success){
+                    //dissmiss
                     Toast.makeText(this@LoginActivity,message, Toast.LENGTH_LONG).show()
 
                     var intent = Intent(this@LoginActivity,NavigationActivity::class.java)
                     startActivity(intent)
                     finish()
                 }else{
+                    //dismiss
                     Toast.makeText(applicationContext,message, Toast.LENGTH_LONG).show()
-
-
                 }
             }
         }

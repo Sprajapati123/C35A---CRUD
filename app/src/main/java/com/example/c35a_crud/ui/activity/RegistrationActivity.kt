@@ -10,6 +10,7 @@ import com.example.c35a_crud.R
 import com.example.c35a_crud.databinding.ActivityRegistrationBinding
 import com.example.c35a_crud.model.UserModel
 import com.example.c35a_crud.repository.UserRepositoryImpl
+import com.example.c35a_crud.utils.LoadingUtils
 import com.example.c35a_crud.viewmodel.UserViewModel
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DatabaseReference
@@ -21,6 +22,8 @@ class RegistrationActivity : AppCompatActivity() {
 
     lateinit var userViewModel: UserViewModel
 
+    lateinit var loadingUtils: LoadingUtils
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -28,19 +31,20 @@ class RegistrationActivity : AppCompatActivity() {
         binding = ActivityRegistrationBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        loadingUtils = LoadingUtils(this)
+
         var repo = UserRepositoryImpl()
         userViewModel = UserViewModel(repo)
 
 
         binding.signUp.setOnClickListener {
+            loadingUtils.show()
             var email = binding.registerEmail.text.toString()
             var password = binding.registerPassword.text.toString()
             var firstName = binding.registerFname.text.toString()
             var lastName = binding.registerLName.text.toString()
             var address = binding.registerAddress.text.toString()
             var phone = binding.registerContact.text.toString()
-
-
 
             userViewModel.signup(email, password) {
                       success, message, userId ->
@@ -53,12 +57,14 @@ class RegistrationActivity : AppCompatActivity() {
                     userViewModel.addUserToDatabase(userId,userModel){
                         success,message->
                         if(success){
+                            loadingUtils.dismiss()
                             Toast.makeText(
                                 this@RegistrationActivity,
                                 message,
                                 Toast.LENGTH_LONG
                             ).show()
                         }else{
+                            loadingUtils.dismiss()
                             Toast.makeText(
                                 this@RegistrationActivity,
                                 message,
@@ -67,6 +73,7 @@ class RegistrationActivity : AppCompatActivity() {
                         }
                     }
                 } else {
+                    loadingUtils.dismiss()
                     Toast.makeText(
                         this@RegistrationActivity,
                         message,

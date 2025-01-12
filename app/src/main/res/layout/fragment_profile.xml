@@ -7,8 +7,6 @@
     android:layout_height="match_parent"
     tools:context=".ui.fragment.ProfileFragment">
 
-
-
     <androidx.cardview.widget.CardView
         android:layout_margin="10dp"
         app:cardCornerRadius="10dp"
