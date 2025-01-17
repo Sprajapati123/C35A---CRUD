@@ -17,6 +17,7 @@
     <EditText
         android:hint="Enter product price"
         android:id="@+id/editProductPrice"
+        android:inputType="numberDecimal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
 
