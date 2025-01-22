@@ -25,8 +25,8 @@ class ProductAdapter(
 
         val itemView : View = LayoutInflater.from(context)
             .inflate(R.layout.sample_products,parent,false)
-
         return ProductViewHolder(itemView)
+
     }
 
     override fun getItemCount(): Int {
