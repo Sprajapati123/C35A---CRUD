@@ -2,6 +2,7 @@ package com.example.c35a_crud.ui.activity
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.View
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -40,6 +41,15 @@ class ProductDashboardActivity : AppCompatActivity() {
         productViewModel.allProducts.observe(this){it->
             it?.let {
                 adapter.updateData(it)
+            }
+        }
+
+        productViewModel.loading.observe(this){loading->
+            if(loading){ // true
+                binding.progressBar.visibility = View.VISIBLE
+            }else{
+                binding.progressBar.visibility = View.GONE
+
             }
         }
 
