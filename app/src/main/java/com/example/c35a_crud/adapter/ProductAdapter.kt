@@ -47,7 +47,6 @@ class ProductAdapter(
 
             intent.putExtra("productId",data[position].productId)
 
-
             context.startActivity(intent)
         }
     }
